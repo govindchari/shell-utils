@@ -1,0 +1,28 @@
+#!/bin/bash
+
+## Written by ChatGPT
+
+# Check if the required number of arguments are provided
+if [ $# -ne 2 ]; then
+  f="$(basename $0)"
+  echo "Usage: $f file1.pdf file2.pdf"
+  exit 1
+fi
+
+# Check if the input files exist
+if [ ! -f "$1" ] || [ ! -f "$2" ]; then
+  echo "Error: Input files do not exist"
+  exit 1
+fi
+
+# Merge the PDF files using pdfunite command
+pdfunite "$1" "$2" merged.pdf
+
+# Check if the output file was created
+if [ -f "merged.pdf" ]; then
+  echo "Merged PDF file created successfully"
+else
+  echo "Error: Failed to create merged PDF file"
+  exit 1
+fi
+
